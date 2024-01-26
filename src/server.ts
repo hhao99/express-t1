@@ -12,5 +12,5 @@ app.get('/', (req: Request, res: Response) => {
 	res.end('hello express');
 });
 app.listen(port, () => {
-	console.log(`app running on port: ${port}`);
+	//	console.log(`app running on port: ${port}`);
 });
