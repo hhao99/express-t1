@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"dev": "nodemon src/index.ts",
+		"dev": "nodemon",
 		"build": "tsc -p . && cp package.json ./build/package.json && cp package-lock.json ./build/package-lock.json && cp .env ./build/.env",
 		"lint": "eslint src/**/*.ts",
 		"lint-fix": "eslint --fix src/**/*.ts",
@@ -24,6 +24,7 @@
 		"dotenv": "^16.4.1",
 		"express": "^4.18.2",
 		"helmet": "^7.1.0",
+		"http": "0.0.1-security",
 		"ts-node": "^10.9.2",
 		"winston": "^3.11.0"
 	},

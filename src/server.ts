@@ -1,16 +1,20 @@
-import dotenv from 'dotenv';
-import express from 'express';
-import type { Express, Request, Response } from 'express';
-// dotenv init
-dotenv.config();
-const port = process.env.PORT || 3000;
+import * as http from 'http';
 
-const app: Express = express();
+import App from './app';
+import logger from './lib/logger';
 
-// first route
-app.get('/', (req: Request, res: Response) => {
-	res.end('hello express');
-});
-app.listen(port, () => {
-	//	console.log(`app running on port: ${port}`);
-});
+const app: App = new App();
+let server: http.Server;
+
+app.init()
+	.then(() => {
+		app.express.set('port', process.env.PORT);
+		server = app.httpServer;
+		server.listen(process.env.PORT || 8080);
+	})
+	.catch((e) => {
+		logger.error('server error');
+		logger.error(e.name);
+		logger.error(e.message);
+		logger.error(e.stack);
+	});
