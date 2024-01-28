@@ -1,7 +1,15 @@
 import * as http from 'http';
+import * as path from 'path';
 import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
+// swagger ui
+import swaggerUI from 'swagger-ui-express';
+import swaggerDoc from '../swagger.json';
+
+// logger
+import logger from './lib/logger';
+// routes
 import registerRoutes from './routes';
 
 export default class App {
@@ -13,7 +21,11 @@ export default class App {
 		this.express = express();
 		this.httpServer = http.createServer(this.express);
 		this.middlewares();
+		this.setupSwagger();
 		this.routes();
+
+		logger.info(__dirname);
+		this.express.use(express.static(path.join(__dirname, '../public')));
 	}
 
 	private routes(): void {
@@ -37,5 +49,8 @@ export default class App {
 				],
 			}),
 		);
+	}
+	private setupSwagger(): void {
+		this.express.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDoc));
 	}
 }

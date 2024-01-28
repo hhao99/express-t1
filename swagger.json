@@ -3,14 +3,14 @@
 	"info": {
 		"description": "Node Typescript Boilerplate for Microservices. Skeleton for Node.js Apps written in TypeScript (with Setup Instructions for ESLint, Prettier, and Husky)",
 		"version": "1.0.0",
-		"title": "Node Boilerplate"
+		"title": "Node express website"
 	},
 	"host": "",
 	"basePath": "",
 	"tags": [
 		{
-			"name": "node-boilerplate",
-			"description": "Node Typescript Boilerplate"
+			"name": "node-express",
+			"description": "Node Typescript express"
 		}
 	],
 	"schemes": ["http", "https"],
