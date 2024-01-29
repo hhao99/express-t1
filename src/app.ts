@@ -1,6 +1,6 @@
 import * as http from 'http';
 import * as path from 'path';
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 // swagger ui
@@ -24,7 +24,6 @@ export default class App {
 		this.setupSwagger();
 		this.routes();
 
-		logger.info(__dirname);
 		this.express.use(express.static(path.join(__dirname, '../public')));
 	}
 
@@ -49,7 +48,14 @@ export default class App {
 				],
 			}),
 		);
+		this.express.use(this.logger_middleware);
 	}
+
+	private logger_middleware(req: Request, res: Response, next: NextFunction) {
+		logger.info(`${req.path}`);
+		next();
+	}
+
 	private setupSwagger(): void {
 		this.express.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDoc));
 	}
